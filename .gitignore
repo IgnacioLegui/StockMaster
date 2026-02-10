@@ -1,0 +1,13 @@
+# Java Project
+target/
+*.class
+*.jar
+*.db
+.idea/
+installer/
+
+# React Project
+landing-page/node_modules/
+landing-page/dist/
+.DS_Store
+*.log

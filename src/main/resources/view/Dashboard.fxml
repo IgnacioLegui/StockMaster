@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="800.0" prefWidth="950.0" spacing="20.0" style="-fx-padding: 30;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.stockmaster.controller.DashboardController">
+   <children>
+      <Label styleClass="header-label" text="Dashboard" />
+      <HBox spacing="20.0">
+         <children>
+             <!-- Cards -->
+            <VBox prefHeight="120.0" prefWidth="250.0" styleClass="card">
+               <children>
+                  <Label text="Total Products" textFill="#aaaaaa">
+                     <VBox.margin>
+                        <Insets left="20.0" top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="lblTotalProducts" text="0" textFill="WHITE" style="-fx-font-size: 36px; -fx-font-weight: bold;">
+                     <VBox.margin>
+                        <Insets left="20.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="120.0" prefWidth="250.0" styleClass="card">
+               <children>
+                  <Label text="Total Inventory Value" textFill="#aaaaaa">
+                     <VBox.margin>
+                        <Insets left="20.0" top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="lblTotalValue" text="\$0.00" textFill="#00d764" style="-fx-font-size: 36px; -fx-font-weight: bold;">
+                     <VBox.margin>
+                        <Insets left="20.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="120.0" prefWidth="250.0" styleClass="card" style="-fx-border-color: #d70000; -fx-border-width: 0 0 0 5;">
+               <children>
+                  <Label text="Low Stock Alerts" textFill="#aaaaaa">
+                     <VBox.margin>
+                        <Insets left="20.0" top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="lblLowStock" text="0" textFill="#ff4d4d" style="-fx-font-size: 36px; -fx-font-weight: bold;">
+                     <VBox.margin>
+                        <Insets left="20.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Label text="Product Distribution by Category" style="-fx-font-size: 18px; -fx-padding: 20 0 0 0;" />
+      <BarChart fx:id="chartCategories" legendVisible="false" prefHeight="400.0">
+        <xAxis>
+          <CategoryAxis label="Category" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis label="Count" side="LEFT" />
+        </yAxis>
+      </BarChart>
+   </children>
+</VBox>
