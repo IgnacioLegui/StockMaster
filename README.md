@@ -59,6 +59,14 @@ Download the latest Windows installer (`.exe`) from the [Releases](https://githu
 
 ---
 
+## 📚 Documentation
+
+For a detailed breakdown of the system's requirements and specifications, please refer to the official documentation:
+
+- [📄 **Software Requirements Specification (SRS)**](./StockMaster_SRS_Ignacio.pdf)
+
+---
+
 ## 📬 Contact Developer
 
 For inquiries, collaborations, or support, feel free to reach out:
@@ -66,6 +74,7 @@ For inquiries, collaborations, or support, feel free to reach out:
 **Ignacio Leguizamon**  
 Software Developer
 
+[![Website](https://img.shields.io/badge/Website-ignacioleguizamon.site-blueviolet?style=flat&logo=safari)](https://ignacioleguizamon.site)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/ignaciolegui/)
 [![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=flat&logo=github)](https://github.com/IgnacioLegui)
 
