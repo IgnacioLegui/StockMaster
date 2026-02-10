@@ -13,7 +13,8 @@ import {
   CheckCircle2,
   Monitor,
   Globe,
-  Linkedin
+  Linkedin,
+  AlertTriangle
 } from 'lucide-react';
 
 // Animations
@@ -255,6 +256,19 @@ function App() {
                 <Github className="w-5 h-5 text-textMuted group-hover:text-white transition-colors" />
                 {text.hero.btnCode}
               </a>
+            </motion.div>
+
+            {/* SmartScreen Warning Note */}
+            <motion.div variants={fadeInUp} className="text-sm text-amber-400/80 bg-amber-900/10 border border-amber-900/20 rounded-lg p-3 max-w-lg mx-auto backdrop-blur-sm">
+              <div className="flex items-start gap-2 text-left">
+                <AlertTriangle className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-semibold mb-1">Windows Protected Your PC?</p>
+                  <p className="text-textMuted/80 text-xs leading-relaxed">
+                    This is a known false positive for new open-source apps. Click <span className="font-bold text-white">More info</span> &rarr; <span className="font-bold text-white">Run anyway</span> to install.
+                  </p>
+                </div>
+              </div>
             </motion.div>
           </motion.div>
 
