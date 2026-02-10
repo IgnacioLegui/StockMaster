@@ -259,7 +259,7 @@ function App() {
             </motion.div>
 
             {/* SmartScreen Warning Note */}
-            <motion.div variants={fadeInUp} className="text-sm text-amber-400/80 bg-amber-900/10 border border-amber-900/20 rounded-lg p-3 max-w-lg mx-auto backdrop-blur-sm">
+            <motion.div variants={fadeInUp} className="text-sm text-amber-400/80 bg-amber-900/10 border border-amber-900/20 rounded-lg p-3 max-w-lg mx-auto backdrop-blur-sm mb-12">
               <div className="flex items-start gap-2 text-left">
                 <AlertTriangle className="w-5 h-5 flex-shrink-0 mt-0.5" />
                 <div>
