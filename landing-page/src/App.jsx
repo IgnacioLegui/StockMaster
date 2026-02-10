@@ -183,6 +183,22 @@ function App() {
     setLang(prev => prev === 'es' ? 'en' : 'es');
   };
 
+  const scrollToSection = (e, id) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      // Offset for fixed header
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background text-text overflow-x-hidden selection:bg-primary selection:text-white font-sans">
 
@@ -197,9 +213,9 @@ function App() {
           </div>
 
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-textMuted">
-            <a href="#features" className="hover:text-white transition-colors">{text.nav.features}</a>
-            <a href="#why-desktop" className="hover:text-white transition-colors">{text.nav.why}</a>
-            <a href="#start" className="hover:text-white transition-colors">{text.nav.start}</a>
+            <a href="#features" onClick={(e) => scrollToSection(e, 'features')} className="hover:text-white transition-colors cursor-pointer">{text.nav.features}</a>
+            <a href="#why-desktop" onClick={(e) => scrollToSection(e, 'why-desktop')} className="hover:text-white transition-colors cursor-pointer">{text.nav.why}</a>
+            <a href="#start" onClick={(e) => scrollToSection(e, 'start')} className="hover:text-white transition-colors cursor-pointer">{text.nav.start}</a>
           </div>
 
           <div className="flex items-center gap-4">
