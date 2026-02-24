@@ -9,17 +9,18 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Priority?>
 
-<VBox prefHeight="800.0" prefWidth="950.0" spacing="15.0" style="-fx-padding: 20;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.stockmaster.controller.CategoryController">
+<VBox spacing="15.0" style="-fx-padding: 20;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.stockmaster.controller.CategoryController">
    <children>
-      <Label styleClass="header-label" text="Category Management" />
+      <Label styleClass="header-label" text="%category.title" />
       
       <!-- Toolbar -->
       <HBox spacing="10.0" alignment="CENTER_LEFT">
          <children>
-             <Button text="Refresh" onAction="#handleRefresh" />
+             <Button text="%product.refresh" onAction="#handleRefresh" styleClass="button, btn-outline" />
              <HBox HBox.hgrow="ALWAYS" />
-             <Button text="Delete Selected" onAction="#handleDelete" style="-fx-background-color: #d70000;" />
+             <Button text="%user.delete" onAction="#handleDelete" styleClass="button, btn-danger" />
          </children>
       </HBox>
 
@@ -29,8 +30,8 @@
           <TableView fx:id="tableCategories" HBox.hgrow="ALWAYS">
               <columns>
                   <TableColumn fx:id="colId" text="ID" prefWidth="50" />
-                  <TableColumn fx:id="colName" text="Name" prefWidth="200" />
-                  <TableColumn fx:id="colDescription" text="Description" prefWidth="300" />
+                  <TableColumn fx:id="colName" text="%product.name" prefWidth="200" />
+                  <TableColumn fx:id="colDescription" text="%product.description" prefWidth="300" />
               </columns>
               <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -38,21 +39,21 @@
           </TableView>
 
           <!-- Edit Form -->
-          <VBox spacing="10.0" prefWidth="300.0" styleClass="card" style="-fx-padding: 15;">
+          <VBox spacing="10.0" minWidth="260" maxWidth="340" prefWidth="300.0" styleClass="card" style="-fx-padding: 18;">
              <children>
-                 <Label text="Category Details" style="-fx-font-weight: bold; -fx-font-size: 14px;" />
+                 <Label text="%category.title" style="-fx-font-weight: bold; -fx-font-size: 15px;" />
                  
-                 <Label text="Name" />
-                 <TextField fx:id="txtName" />
+                 <Label text="%product.name" styleClass="kpi-label" />
+                 <TextField fx:id="txtName" promptText="%category.name" />
                  
-                 <Label text="Description" />
+                 <Label text="%product.description" styleClass="kpi-label" />
                  <TextArea fx:id="txtDescription" prefHeight="100.0" wrapText="true" />
                  
                  <HBox spacing="10.0" alignment="CENTER_RIGHT" style="-fx-padding: 10 0 0 0;">
-                     <Button text="Clear" onAction="#handleClear" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-border-color: white; -fx-border-radius: 4;" />
-                     <Button text="Save" onAction="#handleSave" fx:id="btnSave" />
+                     <Button text="%product.clear" onAction="#handleClear" styleClass="button, btn-outline" />
+                     <Button text="%product.save" onAction="#handleSave" fx:id="btnSave" />
                  </HBox>
-                 <Label fx:id="lblMessage" textFill="RED" wrapText="true" />
+                 <Label fx:id="lblMessage" wrapText="true" />
              </children>
           </VBox>
       </HBox>

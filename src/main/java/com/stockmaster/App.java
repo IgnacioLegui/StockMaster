@@ -12,20 +12,24 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
+    private static Stage primaryStage;
 
     @Override
     public void start(Stage stage) throws IOException {
+        primaryStage = stage;
+
         // Initialize Database
         DBManager.initializeDatabase();
 
-        Parent root = loadFXML("MainLayout");
+        // Start with Login screen
+        Parent root = loadFXML("Login");
 
         scene = new Scene(root, 1200, 800);
         scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
         
         stage.setTitle("StockMaster - Inventory Management");
 
-        // Load Application Icon (Window Title Bar)
+        // Load Application Icon
         try {
             javafx.scene.image.Image icon = new javafx.scene.image.Image(getClass().getResourceAsStream("/images/logo.png"));
             stage.getIcons().add(icon);
@@ -44,6 +48,10 @@ public class App extends Application {
     public static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/view/" + fxml + ".fxml"));
         return fxmlLoader.load();
+    }
+
+    public static Stage getPrimaryStage() {
+        return primaryStage;
     }
 
     public static void main(String[] args) {

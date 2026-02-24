@@ -1,6 +1,6 @@
 package com.stockmaster.controller;
 
-import com.stockmaster.dao.CategoryDAO;
+import com.stockmaster.service.CategoryService;
 import com.stockmaster.model.Category;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -20,7 +20,7 @@ public class CategoryController {
     @FXML private TextArea txtDescription;
     @FXML private Label lblMessage;
 
-    private final CategoryDAO categoryDAO = new CategoryDAO();
+    private final CategoryService categoryService = new CategoryService();
     private Category selectedCategory;
 
     @FXML
@@ -42,7 +42,7 @@ public class CategoryController {
     }
 
     private void loadTableData() {
-        List<Category> categories = categoryDAO.findAll();
+        List<Category> categories = categoryService.findAll();
         tableCategories.setItems(FXCollections.observableArrayList(categories));
     }
 
@@ -53,38 +53,35 @@ public class CategoryController {
     }
 
     @FXML
-    private void handleClear() {
+    public void handleClear() {
         selectedCategory = null;
         txtName.clear();
         txtDescription.clear();
-        lblMessage.setText("");
+        clearMessage();
         tableCategories.getSelectionModel().clearSelection();
     }
 
     @FXML
-    private void handleDelete() {
+    public void handleDelete() {
         Category selected = tableCategories.getSelectionModel().getSelectedItem();
         if (selected == null) {
-            lblMessage.setText("Select a category to delete.");
+            showError("Select a category to delete.");
             return;
         }
         try {
-            categoryDAO.delete(selected.getId());
+            categoryService.delete(selected.getId());
             loadTableData();
             handleClear();
-            lblMessage.setText("Category deleted.");
-            lblMessage.setStyle("-fx-text-fill: green;");
+            showSuccess("Category deleted.");
         } catch (Exception e) {
-            lblMessage.setText("Error deleting: " + e.getMessage());
-            lblMessage.setStyle("-fx-text-fill: red;");
+            showError("Error deleting: " + e.getMessage());
         }
     }
 
     @FXML
-    private void handleSave() {
+    public void handleSave() {
         if (txtName.getText().isEmpty()) {
-            lblMessage.setText("Name is required.");
-            lblMessage.setStyle("-fx-text-fill: red;");
+            showError("Name is required.");
             return;
         }
 
@@ -97,18 +94,16 @@ public class CategoryController {
             c.setDescription(txtDescription.getText());
 
             if (selectedCategory == null) {
-                categoryDAO.insert(c);
-                lblMessage.setText("Category added.");
+                categoryService.insert(c);
+                showSuccess("Category added.");
             } else {
-                categoryDAO.update(c);
-                lblMessage.setText("Category updated.");
+                categoryService.update(c);
+                showSuccess("Category updated.");
             }
-            lblMessage.setStyle("-fx-text-fill: green;");
             loadTableData();
             handleClear();
         } catch (Exception e) {
-            lblMessage.setText("Error saving: " + e.getMessage());
-            lblMessage.setStyle("-fx-text-fill: red;");
+            showError("Error saving: " + e.getMessage());
         }
     }
 
@@ -116,5 +111,23 @@ public class CategoryController {
         selectedCategory = c;
         txtName.setText(c.getName());
         txtDescription.setText(c.getDescription());
+    }
+
+    // Toast-style feedback
+    private void showSuccess(String msg) {
+        lblMessage.setText("✓ " + msg);
+        lblMessage.getStyleClass().removeAll("toast-error", "toast-success");
+        lblMessage.getStyleClass().add("toast-success");
+    }
+
+    private void showError(String msg) {
+        lblMessage.setText("✕ " + msg);
+        lblMessage.getStyleClass().removeAll("toast-error", "toast-success");
+        lblMessage.getStyleClass().add("toast-error");
+    }
+
+    private void clearMessage() {
+        lblMessage.setText("");
+        lblMessage.getStyleClass().removeAll("toast-error", "toast-success");
     }
 }

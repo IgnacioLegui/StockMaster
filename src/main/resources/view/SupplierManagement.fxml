@@ -8,17 +8,18 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Priority?>
 
-<VBox prefHeight="800.0" prefWidth="950.0" spacing="15.0" style="-fx-padding: 20;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.stockmaster.controller.SupplierController">
+<VBox spacing="15.0" style="-fx-padding: 20;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.stockmaster.controller.SupplierController">
    <children>
-      <Label styleClass="header-label" text="Supplier Management" />
+      <Label styleClass="header-label" text="%supplier.title" />
       
       <!-- Toolbar -->
       <HBox spacing="10.0" alignment="CENTER_LEFT">
          <children>
-             <Button text="Refresh" onAction="#handleRefresh" />
+             <Button text="%product.refresh" onAction="#handleRefresh" styleClass="button, btn-outline" />
              <HBox HBox.hgrow="ALWAYS" />
-             <Button text="Delete Selected" onAction="#handleDelete" style="-fx-background-color: #d70000;" />
+             <Button text="%user.delete" onAction="#handleDelete" styleClass="button, btn-danger" />
          </children>
       </HBox>
 
@@ -28,10 +29,10 @@
           <TableView fx:id="tableSuppliers" HBox.hgrow="ALWAYS">
               <columns>
                   <TableColumn fx:id="colId" text="ID" prefWidth="50" />
-                  <TableColumn fx:id="colName" text="Company" prefWidth="150" />
-                  <TableColumn fx:id="colContact" text="Contact" prefWidth="150" />
-                  <TableColumn fx:id="colPhone" text="Phone" prefWidth="100" />
-                  <TableColumn fx:id="colEmail" text="Email" prefWidth="150" />
+                  <TableColumn fx:id="colName" text="%supplier.name" prefWidth="150" />
+                  <TableColumn fx:id="colContact" text="%supplier.contact" prefWidth="150" />
+                  <TableColumn fx:id="colPhone" text="%supplier.phone" prefWidth="100" />
+                  <TableColumn fx:id="colEmail" text="%supplier.email" prefWidth="150" />
               </columns>
               <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -39,27 +40,27 @@
           </TableView>
 
           <!-- Edit Form -->
-          <VBox spacing="10.0" prefWidth="300.0" styleClass="card" style="-fx-padding: 15;">
+          <VBox spacing="10.0" minWidth="260" maxWidth="340" prefWidth="300.0" styleClass="card" style="-fx-padding: 18;">
              <children>
-                 <Label text="Supplier Details" style="-fx-font-weight: bold; -fx-font-size: 14px;" />
+                 <Label text="%supplier.title" style="-fx-font-weight: bold; -fx-font-size: 15px;" />
                  
-                 <Label text="Company Name" />
-                 <TextField fx:id="txtName" />
+                 <Label text="%supplier.name" styleClass="kpi-label" />
+                 <TextField fx:id="txtName" promptText="%supplier.name" />
                  
-                 <Label text="Contact Person" />
-                 <TextField fx:id="txtContact" />
+                 <Label text="%supplier.contact" styleClass="kpi-label" />
+                 <TextField fx:id="txtContact" promptText="%supplier.contact" />
                  
-                 <Label text="Phone" />
-                 <TextField fx:id="txtPhone" />
+                 <Label text="%supplier.phone" styleClass="kpi-label" />
+                 <TextField fx:id="txtPhone" promptText="555-1234" />
 
-                 <Label text="Email" />
-                 <TextField fx:id="txtEmail" />
+                 <Label text="%supplier.email" styleClass="kpi-label" />
+                 <TextField fx:id="txtEmail" promptText="email@example.com" />
                  
                  <HBox spacing="10.0" alignment="CENTER_RIGHT" style="-fx-padding: 10 0 0 0;">
-                     <Button text="Clear" onAction="#handleClear" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-border-color: white; -fx-border-radius: 4;" />
-                     <Button text="Save" onAction="#handleSave" fx:id="btnSave" />
+                     <Button text="%product.clear" onAction="#handleClear" styleClass="button, btn-outline" />
+                     <Button text="%product.save" onAction="#handleSave" fx:id="btnSave" />
                  </HBox>
-                 <Label fx:id="lblMessage" textFill="RED" wrapText="true" />
+                 <Label fx:id="lblMessage" wrapText="true" />
              </children>
           </VBox>
       </HBox>

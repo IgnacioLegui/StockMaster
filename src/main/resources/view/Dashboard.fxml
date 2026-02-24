@@ -7,64 +7,71 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.text.Font?>
 
 <VBox prefHeight="800.0" prefWidth="950.0" spacing="20.0" style="-fx-padding: 30;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.stockmaster.controller.DashboardController">
    <children>
-      <Label styleClass="header-label" text="Dashboard" />
-      <HBox spacing="20.0">
+      <Label styleClass="header-label" text="%dashboard.title" />
+
+      <!-- KPI Cards Row -->
+      <HBox spacing="16.0">
          <children>
-             <!-- Cards -->
-            <VBox prefHeight="120.0" prefWidth="250.0" styleClass="card">
+            <!-- Total Products Card -->
+            <VBox minWidth="150" styleClass="card" style="-fx-padding: 20;">
+               <HBox.hgrow><Priority fx:constant="ALWAYS" /></HBox.hgrow>
                <children>
-                  <Label text="Total Products" textFill="#aaaaaa">
-                     <VBox.margin>
-                        <Insets left="20.0" top="20.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="lblTotalProducts" text="0" textFill="WHITE" style="-fx-font-size: 36px; -fx-font-weight: bold;">
-                     <VBox.margin>
-                        <Insets left="20.0" top="10.0" />
-                     </VBox.margin>
+                  <Label text="%dashboard.total_products" styleClass="kpi-label" />
+                  <Label fx:id="lblTotalProducts" text="0" styleClass="kpi-value" textFill="WHITE">
+                     <VBox.margin><Insets top="8.0" /></VBox.margin>
                   </Label>
                </children>
             </VBox>
-            <VBox prefHeight="120.0" prefWidth="250.0" styleClass="card">
+
+            <!-- Total Inventory Value Card -->
+            <VBox minWidth="150" styleClass="card" style="-fx-padding: 20;">
+               <HBox.hgrow><Priority fx:constant="ALWAYS" /></HBox.hgrow>
                <children>
-                  <Label text="Total Inventory Value" textFill="#aaaaaa">
-                     <VBox.margin>
-                        <Insets left="20.0" top="20.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="lblTotalValue" text="\$0.00" textFill="#00d764" style="-fx-font-size: 36px; -fx-font-weight: bold;">
-                     <VBox.margin>
-                        <Insets left="20.0" top="10.0" />
-                     </VBox.margin>
+                  <Label text="%report.inventory_value" styleClass="kpi-label" />
+                  <Label fx:id="lblTotalValue" text="0.00" styleClass="kpi-value" textFill="#00d764">
+                     <VBox.margin><Insets top="8.0" /></VBox.margin>
                   </Label>
                </children>
             </VBox>
-            <VBox prefHeight="120.0" prefWidth="250.0" styleClass="card" style="-fx-border-color: #d70000; -fx-border-width: 0 0 0 5;">
+
+            <!-- Low Stock Alerts Card -->
+            <VBox minWidth="150" styleClass="card" style="-fx-padding: 20; -fx-border-color: #d70000; -fx-border-width: 0 0 0 4; -fx-border-radius: 10;">
+               <HBox.hgrow><Priority fx:constant="ALWAYS" /></HBox.hgrow>
                <children>
-                  <Label text="Low Stock Alerts" textFill="#aaaaaa">
-                     <VBox.margin>
-                        <Insets left="20.0" top="20.0" />
-                     </VBox.margin>
+                  <Label text="%dashboard.low_stock" styleClass="kpi-label" />
+                  <Label fx:id="lblLowStock" text="0" styleClass="kpi-value" textFill="#ff4d4d">
+                     <VBox.margin><Insets top="8.0" /></VBox.margin>
                   </Label>
-                  <Label fx:id="lblLowStock" text="0" textFill="#ff4d4d" style="-fx-font-size: 36px; -fx-font-weight: bold;">
-                     <VBox.margin>
-                        <Insets left="20.0" top="10.0" />
-                     </VBox.margin>
+               </children>
+            </VBox>
+
+            <!-- Expiring Soon Card -->
+            <VBox minWidth="150" styleClass="card" style="-fx-padding: 20; -fx-border-color: #ffb347; -fx-border-width: 0 0 0 4; -fx-border-radius: 10;">
+               <HBox.hgrow><Priority fx:constant="ALWAYS" /></HBox.hgrow>
+               <children>
+                  <Label text="%dashboard.expiring" styleClass="kpi-label" />
+                  <Label fx:id="lblExpiring" text="0" styleClass="kpi-value" textFill="#ffb347">
+                     <VBox.margin><Insets top="8.0" /></VBox.margin>
                   </Label>
                </children>
             </VBox>
          </children>
       </HBox>
-      <Label text="Product Distribution by Category" style="-fx-font-size: 18px; -fx-padding: 20 0 0 0;" />
-      <BarChart fx:id="chartCategories" legendVisible="false" prefHeight="400.0">
+
+      <!-- Chart -->
+      <Label text="%dashboard.categories" style="-fx-font-size: 18px; -fx-padding: 12 0 0 0; -fx-font-weight: bold;" />
+      <BarChart fx:id="chartCategories" legendVisible="false" minHeight="350">
+        <VBox.vgrow><Priority fx:constant="ALWAYS" /></VBox.vgrow>
         <xAxis>
-          <CategoryAxis label="Category" side="BOTTOM" />
+          <CategoryAxis side="BOTTOM" />
         </xAxis>
         <yAxis>
-          <NumberAxis label="Count" side="LEFT" />
+          <NumberAxis side="LEFT" />
         </yAxis>
       </BarChart>
    </children>

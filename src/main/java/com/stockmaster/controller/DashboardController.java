@@ -1,5 +1,6 @@
 package com.stockmaster.controller;
 
+import com.stockmaster.dao.BatchDAO;
 import com.stockmaster.dao.ProductDAO;
 import com.stockmaster.model.Product;
 import javafx.application.Platform;
@@ -18,9 +19,11 @@ public class DashboardController {
     @FXML private Label lblTotalProducts;
     @FXML private Label lblTotalValue;
     @FXML private Label lblLowStock;
+    @FXML private Label lblExpiring;
     @FXML private BarChart<String, Number> chartCategories;
 
     private final ProductDAO productDAO = new ProductDAO();
+    private final BatchDAO batchDAO = new BatchDAO();
 
     @FXML
     public void initialize() {
@@ -60,15 +63,25 @@ public class DashboardController {
                 .filter(p -> p.getStockCurrent() <= p.getStockMin())
                 .count();
 
+        // Batch expiry counts
+        int expiringSoon = batchDAO.countExpiringSoon(30);
+        int expired = batchDAO.countExpired();
+
         Platform.runLater(() -> {
             lblTotalProducts.setText(String.valueOf(totalProducts));
             lblTotalValue.setText(String.format("$%.2f", totalValue));
             lblLowStock.setText(String.valueOf(lowStockCount));
+            
+            if (expired > 0) {
+                lblExpiring.setText(expiringSoon + " + " + expired + " expired");
+                lblExpiring.setStyle("-fx-text-fill: #ff4d4d;");
+            } else {
+                lblExpiring.setText(String.valueOf(expiringSoon));
+            }
         });
     }
 
     private void updateChart(List<Product> products) {
-        // Group by category name
         Map<String, Long> categoryCounts = products.stream()
                 .collect(Collectors.groupingBy(
                         p -> p.getCategoryName() == null ? "Uncategorized" : p.getCategoryName(), 

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.text.Font?>
+
+<StackPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.stockmaster.controller.LoginController"
+           style="-fx-background-color: #1e1e2e;">
+
+    <!-- Center Login Card -->
+    <VBox alignment="CENTER" spacing="0" maxWidth="380" maxHeight="480"
+          styleClass="card" style="-fx-padding: 40;">
+
+        <!-- Logo + Title -->
+        <HBox alignment="CENTER" spacing="10">
+            <children>
+                <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/logo.png" />
+                    </image>
+                </ImageView>
+                <Label text="StockMaster" textFill="WHITE">
+                    <font>
+                        <Font name="Segoe UI Bold" size="26.0" />
+                    </font>
+                </Label>
+            </children>
+        </HBox>
+
+        <Label text="Sign in to your account" style="-fx-text-fill: #8888aa; -fx-font-size: 13px; -fx-padding: 8 0 24 0;" />
+
+        <!-- Username -->
+        <Label text="Username" styleClass="kpi-label" style="-fx-padding: 0 0 4 0;" />
+        <TextField fx:id="txtUsername" promptText="Enter your username" />
+
+        <Region prefHeight="12" />
+
+        <!-- Password -->
+        <Label text="Password" styleClass="kpi-label" style="-fx-padding: 0 0 4 0;" />
+        <PasswordField fx:id="txtPassword" promptText="Enter your password" onAction="#handleLogin" />
+
+        <Region prefHeight="20" />
+
+        <!-- Login Button -->
+        <Button text="🔐  Sign In" onAction="#handleLogin" prefWidth="300" prefHeight="40"
+                style="-fx-font-size: 14px;" />
+
+        <Region prefHeight="12" />
+
+        <!-- Error Message -->
+        <Label fx:id="lblMessage" wrapText="true" />
+
+        <!-- Footer -->
+        <Label text="v3.0 • Enterprise Edition" 
+               style="-fx-text-fill: #444455; -fx-font-size: 10px; -fx-padding: 20 0 0 0;" />
+    </VBox>
+</StackPane>

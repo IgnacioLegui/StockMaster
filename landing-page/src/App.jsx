@@ -14,7 +14,11 @@ import {
   Monitor,
   Globe,
   Linkedin,
-  AlertTriangle
+  AlertTriangle,
+  ShoppingCart,
+  ClipboardList,
+  Languages,
+  TrendingUp
 } from 'lucide-react';
 
 // Animations
@@ -48,14 +52,14 @@ const translations = {
       features: "Características",
       why: "Por qué Desktop",
       start: "Empezar",
-      download: "Descargar v1.0"
+      download: "Descargar v4.0"
     },
     hero: {
       avail: "Disponible para Windows 10/11",
       titlePre: "Control de Inventario",
       titleSpan: "Profesional",
       titlePost: ", Directo en tu Escritorio.",
-      desc: "Olvídate de las hojas de cálculo complejas y lentas. Gestiona stock, proveedores y categorías con una interfaz diseñada para la velocidad. Gratis, potente y",
+      desc: "Olvídate de las hojas de cálculo. Gestiona stock, ventas POS, órdenes de compra, reportes y más con una interfaz profesional bilingüe. Gratis, potente y",
       private: "100% privado",
       btnDownload: "Descargar Gratis",
       btnCode: "Ver Código"
@@ -81,10 +85,18 @@ const translations = {
       dashboardDesc: "Métricas clave en tiempo real: valor del inventario, productos totales y alertas críticas en una sola vista.",
       alertsTitle: "Alertas Inteligentes",
       alertsDesc: "Notificaciones automáticas cuando el stock baja del mínimo.",
-      exportTitle: "Exportación PDF",
-      exportDesc: "Genera reportes de inventario profesionales con un solo clic.",
+      exportTitle: "Exportación PDF y Excel",
+      exportDesc: "Genera reportes de inventario, ventas y márgenes con un solo clic.",
       searchTitle: "Búsqueda Rápida",
-      searchDesc: "Filtra por nombre o categoría."
+      searchDesc: "Filtra por nombre, categoría o código de barras.",
+      posTitle: "Punto de Venta (POS)",
+      posDesc: "Carrito de compras, cálculo automático de IVA, múltiples métodos de pago, escaneo de códigos de barras e impresión de recibos.",
+      poTitle: "Órdenes de Compra",
+      poDesc: "Crea, recibe y gestiona órdenes de compra. El stock se actualiza automáticamente al recibir.",
+      reportsTitle: "Reportes Avanzados",
+      reportsDesc: "Resumen de ventas, productos top, movimientos de stock, márgenes y lotes por vencer.",
+      i18nTitle: "Bilingüe ES/EN",
+      i18nDesc: "Interfaz completa en español e inglés con cambio instantáneo."
     },
     steps: {
       title: "Empieza en 3 Pasos",
@@ -110,14 +122,14 @@ const translations = {
       features: "Features",
       why: "Why Desktop",
       start: "Get Started",
-      download: "Download v1.0"
+      download: "Download v4.0"
     },
     hero: {
       avail: "Available for Windows 10/11",
       titlePre: "Professional Inventory",
       titleSpan: "Control",
       titlePost: ", Right on your Desktop.",
-      desc: "Forget complex and slow spreadsheets. Manage stock, suppliers, and categories with an interface designed for speed. Free, powerful, and",
+      desc: "Forget spreadsheets. Manage stock, POS sales, purchase orders, reports and more with a professional bilingual interface. Free, powerful, and",
       private: "100% private",
       btnDownload: "Download Free",
       btnCode: "View Code"
@@ -143,10 +155,18 @@ const translations = {
       dashboardDesc: "Key metrics in real-time: inventory value, total products, and critical alerts in a single view.",
       alertsTitle: "Smart Alerts",
       alertsDesc: "Automatic notifications when stock drops below minimum.",
-      exportTitle: "PDF Export",
-      exportDesc: "Generate professional inventory reports with a single click.",
+      exportTitle: "PDF & Excel Export",
+      exportDesc: "Generate inventory, sales, and margin reports with a single click.",
       searchTitle: "Quick Search",
-      searchDesc: "Filter by name or category."
+      searchDesc: "Filter by name, category, or barcode.",
+      posTitle: "Point of Sale (POS)",
+      posDesc: "Shopping cart, automatic tax calculation, multiple payment methods, barcode scanning, and receipt printing.",
+      poTitle: "Purchase Orders",
+      poDesc: "Create, receive, and manage purchase orders. Stock updates automatically on receipt.",
+      reportsTitle: "Advanced Reports",
+      reportsDesc: "Sales summary, top products, stock movements, profit margins, and expiring batches.",
+      i18nTitle: "Bilingual ES/EN",
+      i18nDesc: "Full interface in Spanish and English with instant switching."
     },
     steps: {
       title: "Start in 3 Steps",
@@ -394,14 +414,14 @@ function App() {
             <p className="text-textMuted">{text.features.subtitle}</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto h-auto md:h-[600px]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {/* Feature 1: Large Dashboard */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="md:col-span-2 md:row-span-2 bg-surface/40 border border-white/5 rounded-3xl p-8 relative overflow-hidden group hover:border-white/10 transition-colors"
+              className="md:col-span-2 bg-surface/40 border border-white/5 rounded-3xl p-8 relative overflow-hidden group hover:border-white/10 transition-colors"
             >
               <div className="max-w-xs relative z-10">
                 <div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mb-4">
@@ -411,7 +431,6 @@ function App() {
                 <p className="text-textMuted">{text.features.dashboardDesc}</p>
               </div>
               <div className="absolute right-0 bottom-0 w-2/3 h-2/3 bg-gradient-to-tl from-primary/10 to-transparent rounded-tl-3xl translate-x-10 translate-y-10 group-hover:translate-x-5 group-hover:translate-y-5 transition-transform duration-500">
-                {/* Abstract UI Representation */}
                 <div className="w-full h-full border-l border-t border-white/10 bg-background/50 backdrop-blur-sm rounded-tl-xl p-6">
                   <div className="flex gap-4 mb-4">
                     <div className="h-20 w-1 bg-primary/50 rounded-full" />
@@ -426,12 +445,62 @@ function App() {
               </div>
             </motion.div>
 
-            {/* Feature 2: High Stock Alerts */}
+            {/* Feature 2: POS */}
             <motion.div
               initial={{ opacity: 0, y: -50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
+              className="bg-surface/40 border border-white/5 rounded-3xl p-8 relative overflow-hidden group hover:border-emerald-500/30 transition-colors"
+            >
+              <div className="relative z-10">
+                <ShoppingCart className="w-8 h-8 text-emerald-400 mb-4" />
+                <h3 className="text-xl font-bold mb-2 text-white">{text.features.posTitle}</h3>
+                <p className="text-sm text-textMuted">{text.features.posDesc}</p>
+              </div>
+              <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl group-hover:bg-emerald-500/20 transition-colors" />
+            </motion.div>
+
+            {/* Feature 3: Purchase Orders */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="bg-surface/40 border border-white/5 rounded-3xl p-8 relative overflow-hidden group hover:border-purple-500/30 transition-colors"
+            >
+              <div className="relative z-10">
+                <ClipboardList className="w-8 h-8 text-purple-400 mb-4" />
+                <h3 className="text-xl font-bold mb-2 text-white">{text.features.poTitle}</h3>
+                <p className="text-sm text-textMuted">{text.features.poDesc}</p>
+              </div>
+              <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl group-hover:bg-purple-500/20 transition-colors" />
+            </motion.div>
+
+            {/* Feature 4: Reports (large) */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="md:col-span-2 bg-surface/40 border border-white/5 rounded-3xl p-8 relative overflow-hidden group hover:border-orange-500/20 transition-colors"
+            >
+              <div className="max-w-md relative z-10">
+                <div className="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center mb-4">
+                  <TrendingUp className="w-6 h-6 text-orange-400" />
+                </div>
+                <h3 className="text-2xl font-bold mb-2 text-white">{text.features.reportsTitle}</h3>
+                <p className="text-textMuted">{text.features.reportsDesc}</p>
+              </div>
+              <div className="absolute right-0 bottom-0 w-1/2 h-2/3 bg-gradient-to-tl from-orange-500/10 to-transparent rounded-tl-3xl translate-x-10 translate-y-10 group-hover:translate-x-5 group-hover:translate-y-5 transition-transform duration-500" />
+            </motion.div>
+
+            {/* Feature 5: Smart Alerts */}
+            <motion.div
+              initial={{ opacity: 0, y: -50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.5 }}
               className="bg-surface/40 border border-white/5 rounded-3xl p-8 relative overflow-hidden group hover:border-secondary/30 transition-colors"
             >
               <div className="relative z-10">
@@ -442,12 +511,12 @@ function App() {
               <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-secondary/10 rounded-full blur-3xl group-hover:bg-secondary/20 transition-colors" />
             </motion.div>
 
-            {/* Feature 3: Export */}
+            {/* Feature 6: Export */}
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
               className="bg-surface/40 border border-white/5 rounded-3xl p-8 relative overflow-hidden group hover:border-green-500/30 transition-colors"
             >
               <div className="relative z-10">
@@ -457,18 +526,35 @@ function App() {
               </div>
             </motion.div>
 
-            {/* Feature 4: Search */}
+            {/* Feature 7: Search */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="md:col-span-1 bg-surface/40 border border-white/5 rounded-3xl p-8 flex items-center gap-4 group hover:bg-surface/60 transition-colors"
+              transition={{ duration: 0.6, delay: 0.7 }}
+              className="bg-surface/40 border border-white/5 rounded-3xl p-8 flex items-center gap-4 group hover:bg-surface/60 transition-colors"
             >
               <Search className="w-8 h-8 text-blue-400" />
               <div>
                 <h3 className="text-lg font-bold text-white">{text.features.searchTitle}</h3>
                 <p className="text-xs text-textMuted">{text.features.searchDesc}</p>
+              </div>
+            </motion.div>
+
+            {/* Feature 8: Bilingual i18n */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="md:col-span-2 bg-surface/40 border border-white/5 rounded-3xl p-8 flex items-center gap-6 group hover:bg-surface/60 transition-colors"
+            >
+              <div className="w-14 h-14 bg-cyan-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                <Languages className="w-7 h-7 text-cyan-400" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-white mb-1">{text.features.i18nTitle}</h3>
+                <p className="text-sm text-textMuted">{text.features.i18nDesc}</p>
               </div>
             </motion.div>
           </div>

@@ -1,7 +1,7 @@
 # Build StockMaster Installer
 
 $APP_NAME = "StockMaster"
-$APP_VERSION = "1.0.0"
+$APP_VERSION = "4.0.0"
 $MAIN_JAR = "StockMaster-1.0-SNAPSHOT.jar"
 $MAIN_CLASS = "com.stockmaster.Launcher"
 $INPUT_DIR = "target/libs"

@@ -10,6 +10,8 @@ public class Product {
     private double priceSell;
     private int stockCurrent;
     private int stockMin;
+    private String barcode;
+    private double taxRate = 21.0;
 
     // Helper fields for UI display (names instead of IDs)
     private String categoryName;
@@ -69,9 +71,18 @@ public class Product {
     public int getStockMin() { return stockMin; }
     public void setStockMin(int stockMin) { this.stockMin = stockMin; }
 
+    public String getBarcode() { return barcode; }
+    public void setBarcode(String barcode) { this.barcode = barcode; }
+
+    public double getTaxRate() { return taxRate; }
+    public void setTaxRate(double taxRate) { this.taxRate = taxRate; }
+
     public String getCategoryName() { return categoryName; }
     public void setCategoryName(String categoryName) { this.categoryName = categoryName; }
 
     public String getSupplierName() { return supplierName; }
     public void setSupplierName(String supplierName) { this.supplierName = supplierName; }
+
+    @Override
+    public String toString() { return name; }
 }

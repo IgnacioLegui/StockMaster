@@ -1,6 +1,6 @@
 package com.stockmaster.controller;
 
-import com.stockmaster.dao.SupplierDAO;
+import com.stockmaster.service.SupplierService;
 import com.stockmaster.model.Supplier;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -24,7 +24,7 @@ public class SupplierController {
     @FXML private TextField txtEmail;
     @FXML private Label lblMessage;
 
-    private final SupplierDAO supplierDAO = new SupplierDAO();
+    private final SupplierService supplierService = new SupplierService();
     private Supplier selectedSupplier;
 
     @FXML
@@ -48,7 +48,7 @@ public class SupplierController {
     }
 
     private void loadTableData() {
-        List<Supplier> suppliers = supplierDAO.findAll();
+        List<Supplier> suppliers = supplierService.findAll();
         tableSuppliers.setItems(FXCollections.observableArrayList(suppliers));
     }
 
@@ -59,54 +59,49 @@ public class SupplierController {
     }
 
     @FXML
-    private void handleClear() {
+    public void handleClear() {
         selectedSupplier = null;
         txtName.clear();
         txtContact.clear();
         txtPhone.clear();
         txtEmail.clear();
-        lblMessage.setText("");
+        clearMessage();
         tableSuppliers.getSelectionModel().clearSelection();
     }
 
     @FXML
-    private void handleDelete() {
+    public void handleDelete() {
         Supplier selected = tableSuppliers.getSelectionModel().getSelectedItem();
         if (selected == null) {
-            lblMessage.setText("Select a supplier to delete.");
+            showError("Select a supplier to delete.");
             return;
         }
         try {
-            supplierDAO.delete(selected.getId());
+            supplierService.delete(selected.getId());
             loadTableData();
             handleClear();
-            lblMessage.setText("Supplier deleted.");
-            lblMessage.setStyle("-fx-text-fill: green;");
+            showSuccess("Supplier deleted.");
         } catch (Exception e) {
-            lblMessage.setText("Error deleting: " + e.getMessage());
-            lblMessage.setStyle("-fx-text-fill: red;");
+            showError("Error deleting: " + e.getMessage());
         }
     }
 
     @FXML
-    private void handleSave() {
+    public void handleSave() {
         if (txtName.getText().isEmpty()) {
-            lblMessage.setText("Company Name is required.");
-            lblMessage.setStyle("-fx-text-fill: red;");
+            showError("Company Name is required.");
             return;
         }
         
         String email = txtEmail.getText();
         if (email != null && !email.isEmpty() && !email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
-             lblMessage.setText("Invalid Email format.");
-             lblMessage.setStyle("-fx-text-fill: red;");
+             showError("Invalid Email format.");
              return;
         }
         
         String phone = txtPhone.getText();
         if (phone != null && !phone.isEmpty() && !phone.matches("\\d{3}-\\d{4}|\\d+")) {
-             lblMessage.setText("Invalid Phone format (e.g. 555-1234 or 123456789).");
-             lblMessage.setStyle("-fx-text-fill: red;");
+             showError("Invalid Phone format (e.g. 555-1234 or 123456789).");
              return;
         }
 
@@ -121,18 +116,16 @@ public class SupplierController {
             s.setEmail(txtEmail.getText());
 
             if (selectedSupplier == null) {
-                supplierDAO.insert(s);
-                lblMessage.setText("Supplier added.");
+                supplierService.insert(s);
+                showSuccess("Supplier added.");
             } else {
-                supplierDAO.update(s);
-                lblMessage.setText("Supplier updated.");
+                supplierService.update(s);
+                showSuccess("Supplier updated.");
             }
-            lblMessage.setStyle("-fx-text-fill: green;");
             loadTableData();
             handleClear();
         } catch (Exception e) {
-            lblMessage.setText("Error saving: " + e.getMessage());
-            lblMessage.setStyle("-fx-text-fill: red;");
+            showError("Error saving: " + e.getMessage());
         }
     }
 
@@ -142,5 +135,23 @@ public class SupplierController {
         txtContact.setText(s.getContactName());
         txtPhone.setText(s.getPhone());
         txtEmail.setText(s.getEmail());
+    }
+
+    // Toast-style feedback
+    private void showSuccess(String msg) {
+        lblMessage.setText("✓ " + msg);
+        lblMessage.getStyleClass().removeAll("toast-error", "toast-success");
+        lblMessage.getStyleClass().add("toast-success");
+    }
+
+    private void showError(String msg) {
+        lblMessage.setText("✕ " + msg);
+        lblMessage.getStyleClass().removeAll("toast-error", "toast-success");
+        lblMessage.getStyleClass().add("toast-error");
+    }
+
+    private void clearMessage() {
+        lblMessage.setText("");
+        lblMessage.getStyleClass().removeAll("toast-error", "toast-success");
     }
 }

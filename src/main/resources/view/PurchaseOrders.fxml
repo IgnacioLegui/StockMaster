@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Priority?>
+
+<VBox spacing="12.0" style="-fx-padding: 20;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.stockmaster.controller.PurchaseOrderController">
+   <children>
+      <!-- Header -->
+      <HBox alignment="CENTER_LEFT" spacing="12.0">
+         <children>
+            <Label text="%po.title" styleClass="header-label" />
+            <HBox HBox.hgrow="ALWAYS" />
+            <Button text="%po.new" onAction="#handleNewOrder" styleClass="button, btn-sm" />
+            <Label fx:id="lblMessage" />
+         </children>
+      </HBox>
+
+      <!-- Orders Table -->
+      <TableView fx:id="tableOrders" VBox.vgrow="ALWAYS">
+         <columns>
+            <TableColumn fx:id="colOrderId" text="ID" prefWidth="50" />
+            <TableColumn fx:id="colOrderDate" text="%report.from" prefWidth="100" />
+            <TableColumn fx:id="colOrderSupplier" text="%po.supplier" prefWidth="150" />
+            <TableColumn fx:id="colOrderTotal" text="Total" prefWidth="100" />
+            <TableColumn fx:id="colOrderStatus" text="%batch.status" prefWidth="100" />
+            <TableColumn fx:id="colOrderNotes" text="%po.notes" prefWidth="200" />
+         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+
+      <!-- Action buttons -->
+      <HBox spacing="8.0">
+         <children>
+            <Button text="%po.receive" onAction="#handleReceiveOrder" styleClass="button, btn-sm" />
+            <Button text="%po.cancel" onAction="#handleCancelOrder" styleClass="button, btn-danger, btn-sm" />
+            <Button text="%po.view_items" onAction="#handleViewItems" styleClass="button, btn-outline, btn-sm" />
+            <Button text="%po.refresh" onAction="#handleRefresh" styleClass="button, btn-outline, btn-sm" />
+         </children>
+      </HBox>
+
+      <!-- New Order Form (initially hidden) -->
+      <VBox fx:id="orderFormPanel" spacing="10.0" styleClass="card" style="-fx-padding: 16;" managed="false" visible="false">
+         <children>
+            <Label text="%po.title" style="-fx-font-weight: bold; -fx-font-size: 14px;" />
+
+            <HBox spacing="12.0" alignment="CENTER_LEFT">
+               <children>
+                  <Label text="%po.supplier" minWidth="80" />
+                  <ComboBox fx:id="comboSupplier" prefWidth="200" />
+                  <Label text="%po.notes" />
+                  <TextField fx:id="txtNotes" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+
+            <!-- Item entry -->
+            <HBox spacing="8.0" alignment="CENTER_LEFT">
+               <children>
+                  <Label text="%po.product" />
+                  <ComboBox fx:id="comboProduct" prefWidth="200" />
+                  <Label text="%po.qty" />
+                  <Spinner fx:id="spinnerOrderQty" prefWidth="80" />
+                  <Label text="%po.unit_cost" />
+                  <TextField fx:id="txtUnitCost" prefWidth="80" />
+                  <Button text="%po.add_item" onAction="#handleAddItem" styleClass="button, btn-sm" />
+               </children>
+            </HBox>
+
+            <!-- Order items table -->
+            <TableView fx:id="tableOrderItems" prefHeight="150.0">
+               <columns>
+                  <TableColumn fx:id="colItemProduct" text="%po.product" prefWidth="200" />
+                  <TableColumn fx:id="colItemQty" text="%po.qty" prefWidth="70" />
+                  <TableColumn fx:id="colItemCost" text="%po.unit_cost" prefWidth="80" />
+                  <TableColumn fx:id="colItemTotal" text="Total" prefWidth="80" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+
+            <HBox spacing="8.0" alignment="CENTER_LEFT">
+               <children>
+                  <Label text="%po.order_total" style="-fx-font-weight: bold;" />
+                  <Label fx:id="lblOrderTotal" text="0.00" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #00d764;" />
+                  <HBox HBox.hgrow="ALWAYS" />
+                  <Button text="%po.save" onAction="#handleSaveOrder" styleClass="button, btn-sm" />
+                  <Button text="%po.cancel_form" onAction="#handleCancelForm" styleClass="button, btn-outline, btn-sm" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</VBox>
