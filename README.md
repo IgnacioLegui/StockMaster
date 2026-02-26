@@ -134,6 +134,7 @@ src/main/resources/
 ## 📚 Documentation
 
 - [📄 **Software Requirements Specification (SRS)**](./StockMaster_SRS_Ignacio.pdf)
+- [📊 **Database Schema (EER Diagram)**](./db-graph.pdf)
 
 ---
 
